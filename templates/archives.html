@@ -1,0 +1,12 @@
+{% extends "inc/_base" %}
+
+{% block blog %}
+
+<h2>Archives</h2>
+<ul>
+{% for entry in blx.entries.find({ section: 'Blog', limit: '100', order: "postdate"}) %}
+ <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

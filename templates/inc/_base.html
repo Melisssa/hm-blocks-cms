@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+{% block head %}
+<link rel="stylesheet" href="/assets/css/styles.css" />
+<link href='http://fonts.googleapis.com/css?family=Trocchi' rel='stylesheet' type='text/css'>
+<meta charset="UTF-8" />
+<title>{% block title %}{% endblock %}  HighlyMoody</title>
+{% endblock %}
+
+<body>
+
+<div id="content">
+
+<header>
+<h1><a href="/">HighlyMoody</a></h1>
+
+<nav>
+<ul>
+<li><a href="{{ siteUrl }}">Home</a></li>
+<li><a href="{{ siteUrl }}/archives">Archives</a></li>
+<li><a href="{{ siteUrl }}/about">About</a></li>
+</ul>
+</nav>
+
+</header>
+
+<article clas="main">
+{% block blog %}
+{% for entry in blx.entries.find({section: 'Blog', limit: '1' }) %}
+
+		<section class="copy">
+			<h2><a href="{{ entry.url }}">{{ entry.title }}</a></h2>
+			{{ entry.body | raw }}
+		</section><!--copy-->
+
+		<section class="meta">
+		
+			<div class="post-date">
+			Posted  {{ entry.postDate|date("M d, Y") }} 
+			</div><!--meta-->
+			
+			<ul class="tags clearfix">
+				{% for tag in entry.tags() %}
+				  <li><a href="/tag/{websafe_tag}" title="#">#{{ tag.name }}</a></li>
+				{% endfor %}
+			</ul>
+		</section><!--meta-->
+
+{% endfor %}
+{% endblock %}
+
+</article>
+
+<aside>
+    <h2>Blogroll</h2>
+    <ul>
+	  <li><a href="http://alittlec.net/">a little c</a></li>	  
+	  <li><a href="http://www.failuretonap.com">Failure to Nap</a></li> 
+      <li><a href="http://heyfreak.com/">Hey Freak</a></li>   
+	  <li><a href="http://lisajill.net/">Lisa Jill</a></li>   
+      <li><a href="http://nicolewolverton.com/">Nicole</a></li>
+	  <li><a href="http://thescanlons.net/weblog/">Soapbox Superstar</a></li>
+	  <li><a href="http://www.swirlspice.com/">Swirlspice</a></li>
+	  <li><a href="http://tenth-muse.com/">Tenth-Muse</a></li>
+	</ul>
+	
+	<h2>Social</h2>
+	<ul>
+	<li><a href="http://instagram.com/meljc">Instagram</a></li>
+	<li><a href="http://twitter.com/melissaconnolly">Twitter</a></li>
+	
+	</ul>
+	
+	
+  </aside>
+
+{% include "inc/_footer" %}
+
+</div>
+</body>
+</html>

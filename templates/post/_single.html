@@ -1,0 +1,42 @@
+{% extends "inc/_base" %}
+
+{% block blog %}
+	<article>
+		<section class="copy">
+			<h2><a href="{{ entry.url }}">{{ entry.title }}&nbsp;?</a></h2>
+			{{ entry.body | raw }}
+
+		</section><!--copy-->
+		
+		<section class="meta">
+			<div class="post-date">
+			Posted  {{ entry.postDate|date("M d, Y") }} 
+			</div><!--meta-->
+			
+			<ul class="tags clearfix">
+				{% for tag in entry.tags() %}
+				  <li><a href="/tag/{websafe_tag}" title="#">#{{ tag.name }}</a></li>
+				{% endfor %}
+			</ul>
+		</section><!--meta-->
+		
+		
+		<section class="comments">
+		<div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'highlymoody'; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+		</section>
+	</article>
+{% endblock %}
